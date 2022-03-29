@@ -899,6 +899,7 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     top: 0;
     left: 18.5%;
     width: 81.5%;
+    transition: 1s;
 }
 
 /*------------------------------------------------
@@ -910,6 +911,7 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     margin-left: 18.5%;
     padding-top: 80px;
     padding-bottom: 50px;
+    transition: 1s;
 }
 
 /*------------------------------------------------
@@ -923,6 +925,7 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     left: 0;
     width: 18.5%;
     height: 100%;
+    transition: 1s;
 }
 
 /*------------------------------------------------
@@ -973,6 +976,7 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     bottom: 0;
     left: 18.5%;
     width: 81.5%;
+    transition: 1s;
 }
 
 /*------------------------------------------------
@@ -985,6 +989,7 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     bottom: 30px;
     right: 30px;
     display: none;
+    transition: 1s;
 }
 
 /*------------------------------------------------
@@ -1028,9 +1033,11 @@ h6 small, .h6 small, h6 .small, .h6 .small {
     #wrapper-left {
         margin-left: 0;
         width: 80px;
+        transition: 1s;
     }
     #wrapper.toggled #wrapper-left {
         display: none;
+        transition: 1s;
     }
 
     #wrapper #wrapper-content {
@@ -7824,159 +7831,7 @@ hr.border-fade{
     opacity: 1 !important;
 }
 
-/*------------------------------------------------
-- SWITCH INPUT --------------------------------
-------------------------------------------------*/
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input:checked + .slider {
-    background-color: #ef2b41 !important;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #ef2b41;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-/*------------------------------------------------
-- SWITCH INPUT --------------------------------
-------------------------------------------------*/
-.profuct-attributs-light{
-    border: 1px dashed white;
-    border-radius: 10px;
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-}
-.profuct-attributs{
-    border: 1px dashed black;
-    height: 60px;
-    border-radius: 10px;
-}
-.profuct-attributs .attributeBtnContainer, .profuct-attributs-light .attributeBtnContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-}
-.profuct-attributs .attributeBtnContainer a, .profuct-attributs-light .attributeBtnContainer a{
-    font-size: 1.5em;
-    font-weight: 400;
-}
-.attributs-content{
-    height: auto !important;
-}
-.closeable{
-    border: .5px solid black;
-    border-radius: 5px;
-    padding: 5px 7px;
-    overflow: hidden;
-}
-.closeable-light{
-    border: .5px solid white;
-    border-radius: 5px;
-    padding: 5px 7px;
-    overflow: hidden;
-}
-.closeBtn{
-    cursor: pointer;
-}
-.appendInputs{
-    justify-content: space-between;
-}
-.cursor-pointer{
-    cursor: pointer;
-}
-img{
-    position: relative;
-}
-.imgCloseBtn{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 56px;
-    opacity: 0.0;
-    cursor: pointer;
-    transition: 0.5s;
-}
-.imgCloseBtn:hover{
-    opacity: 0.9;
-    transition: 0.5s;
-}
-.paymentBtn{
-    max-width: 128px !important;
-    max-height: 128px !important;
-}
-.paymentBtn.active{
-    border: 10px solid green !important;
-}
-/*Advertisement layouts*/
-.empty-ad{
-    background-size: cover;
-    background-position: center;
-    height: 300px;
-    opacity: 0.9;
-    cursor: pointer;
-    transition: 0.5s;
-}
-.empty-ad:hover{
-    transition: 0.5s;
-    opacity: 1;
-}
-.empty-ad .card-body{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
 /*===================================================================================================
 - ---------------------------------------------------------------------------------------------------
 ===================================================================================================*/
