@@ -86,10 +86,10 @@ class LeftBar extends Component {
                             </li>
 
                             <li className="nav-item">
-                                <a href="#" className="nav-link">
+                                <Link to="/device" className="nav-link">
                                     <AiFillDatabase size={25}/>
-                                    <span className="link-text">drive</span>
-                                </a>
+                                    <span className="link-text">Device</span>
+                                </Link>
                             </li>
 
                             {/*<li className={`nav-item has-dropdown`}>*/}

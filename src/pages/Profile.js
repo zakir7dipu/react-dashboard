@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Col, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 class Profile extends Component {
     render() {
@@ -10,7 +11,7 @@ class Profile extends Component {
                     <Col>
                         <nav
                             className="breadcrumb justify-content-sm-start justify-content-center text-center text-light bg-dark ">
-                            <a className="breadcrumb-item text-white" href="#">Home</a>
+                            <Link className="breadcrumb-item text-white" to="/profile">Home</Link>
                             <span className="breadcrumb-item active">Profile</span>
                             <span className="breadcrumb-info" id="time"></span>
                         </nav>
