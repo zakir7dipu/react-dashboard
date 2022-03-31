@@ -7,10 +7,40 @@ import {HashRouter} from "react-router-dom";
 import AppRouter from "./router/AppRouter";
 import Footer from "./components/footer";
 import Login from "./pages/Login";
+import "./GlobalVariable"
 
 class App extends Component {
+
+    constructor(props) {
+        super();
+        this.state = {
+            isLogIn: false
+        }
+    }
+
+    componentDidMount() {
+        let session = JSON.parse(window.sessionStorage.getItem('session'))
+        if (session){
+            if (!session.welcome) {
+                global.toast.fire({
+                    icon: 'success',
+                    title: `Welcome ${session.name}`
+                })
+                window.sessionStorage.setItem('session', JSON.stringify({
+                    name: session.name,
+                    token: session.token,
+                    welcome: true,
+                }))
+            }
+            this.setState({isLogIn:true})
+        } else {
+            this.setState({isLogIn:false})
+        }
+        console.log(session)
+    }
+
     render() {
-        if(1 < 2){
+        if(!this.state.isLogIn){
             return (
                 <Fragment>
                     <Login/>

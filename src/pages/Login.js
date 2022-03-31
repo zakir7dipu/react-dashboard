@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import Logo from "../assets/img/logo/large.png"
+import "../GlobalVariable"
+import axios from "axios";
+axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 class Login extends Component {
+
     constructor(prop) {
         super();
         this.state = {
+            baseUrl: 'http://127.0.0.1:8000',
             email: '',
             password: '',
             remember_me: ''
@@ -18,12 +23,34 @@ class Login extends Component {
             password: this.state.password,
             remember_me: this.state.remember_me
         }
-        console.log(input)
+        this.loginAction(input);
         this.setState({
             email: '',
             password: '',
             remember_me: ''
         })
+    }
+
+    loginAction = (data) => {
+        axios.post(`/api/login`, data)
+            .then(response => {
+                global.toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
+
+                window.sessionStorage.setItem('session', JSON.stringify({
+                    name: response.data.name,
+                    token: response.data.token,
+                    welcome: false,
+                }))
+                window.location.href= '/'
+
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.message });
+                console.error('There was an error!', error);
+            });
     }
 
     render() {

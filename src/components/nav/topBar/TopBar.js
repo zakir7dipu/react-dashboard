@@ -82,6 +82,10 @@ class TopBar extends Component {
         }
     }
 
+    logoutAction = () => {
+        window.sessionStorage.removeItem('session')
+        window.location.href ='/'
+    }
 
     render() {
         return (
@@ -186,7 +190,7 @@ class TopBar extends Component {
                                     <AiFillLock size={15}/>
                                     Lock</a>
                                 <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#">
+                                <a className="dropdown-item" href="#" onClick={this.logoutAction}>
                                     <AiOutlinePoweroff size={15}/>
                                     Deconnexion</a>
                             </div>
