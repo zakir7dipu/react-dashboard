@@ -9,6 +9,8 @@ class DeviceAdd extends Component {
         this.state = {
             company: '',
             device_id: '',
+            device_type: '',
+            errorMessage: ''
         }
     }
     // componentDidMount() {
@@ -20,6 +22,7 @@ class DeviceAdd extends Component {
         let data = {
             company: this.state.company,
             device_id: this.state.device_id,
+            device_type: this.state.device_type
         }
         axios.post(`/api/device`, data,{ headers: {"token" : session.token} })
             .then(response=>{
@@ -35,6 +38,7 @@ class DeviceAdd extends Component {
         this.setState({
             company: '',
             device_id: '',
+            device_type: '',
         })
     }
 
@@ -42,7 +46,7 @@ class DeviceAdd extends Component {
         return (
             <Modal
                 show={this.props.show}
-                size="sm"
+                // size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -51,8 +55,8 @@ class DeviceAdd extends Component {
                         Add Device
                     </Modal.Title>
                 </Modal.Header>
-                    <form onSubmit={this.saveDevice}>
-                <Modal.Body>
+                <form onSubmit={this.saveDevice}>
+                    <Modal.Body>
                         <div className="form-group">
                             <label htmlFor="companyName">Company Name</label>
                             <input className="form-control" type="text" name="company" id="companyName" required={true} onChange={(e)=>{
@@ -66,12 +70,23 @@ class DeviceAdd extends Component {
                                 this.setState({device_id:e.target.value})
                             }} value={this.state.device_id}/>
                         </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button type="submit" onClick={this.props.onHide}>Save</Button>
-                    <Button onClick={this.props.onHide}>Close</Button>
-                </Modal.Footer>
-                    </form>
+                        
+                        <div className="form-group">
+                            <label htmlFor="deviceId">Device Type</label>
+                            <select className="form-control" name="device_type" id="deviceType" required={true} onChange={(e)=>{
+                                this.setState({device_type:e.target.value})
+                            }} value={this.state.device_type}>
+                                <option value="">Select one</option>
+                                <option value="master">Master</option>
+                                <option value="service">Service</option>
+                            </select>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button type="submit" className="btn-danger" onClick={this.props.onHide}>Save</Button>
+                        <Button onClick={this.props.onHide}>Close</Button>
+                    </Modal.Footer>
+                </form>
             </Modal>
         );
     }
