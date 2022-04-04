@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard"
 import Profile from "../pages/Profile"
 import Login from "../pages/Login";
 import Device from "../pages/Device";
+import Attendent from "../pages/Attendent";
 class AppRouter extends Component {
     render() {
         return (
@@ -13,6 +14,7 @@ class AppRouter extends Component {
                     <Route exact path="/" component={Dashboard}/>
                     <Route exact path="/device" component={Device}/>
                     <Route exact path="/profile" component={Profile}/>
+                    <Route exact path="/attendents" component={Attendent}/>
                 </Switch>
             </Fragment>
         );

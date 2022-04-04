@@ -2,9 +2,46 @@ import React, {Component} from 'react';
 import {Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {IoIosAddCircleOutline} from "@react-icons/all-files/io/IoIosAddCircleOutline";
-import DeviceAdd from "../components/modals/DeviceAdd";
+import AttendantAdd from "../components/modals/AttendentAdd";
+import axios from "axios";
 
-class Attendent extends Component {
+class Attendant extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            attendant: [],
+            modalShow:false
+        }
+    }
+
+    setModalShow = (value) => {
+        this.setState({modalShow:value});
+        setTimeout(()=>{
+            this.getAllAttendants()
+        },3000);
+    }
+
+    getAllAttendants = () => {
+        let session = JSON.parse(window.sessionStorage.getItem('session'))
+        axios.get(`/api/attendants`, { headers: {"token" : session.token} })
+            .then(response => {
+                if (response.data.status === 200){
+                    // console.log(response.data.data)
+                    this.setState({attendant:response.data.data})
+                } else if (response.data.status === 2) {
+                    // console.log(response.data)
+                }
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.message });
+                console.error('There was an error!', error);
+            });
+    }
+
+    componentDidMount() {
+        this.getAllAttendants();
+    }
+
     render() {
         return (
             <div>
@@ -43,15 +80,15 @@ class Attendent extends Component {
                                     </thead>
                                     <tbody>
                                     {
-                                        this.state.devices.map((item, index) => {
+                                        this.state.attendant.map((item, index) => {
                                             return(
                                                 <tr key={item.id}>
                                                     <td>{index+1}</td>
+                                                    <td>{item.attendant_sl}</td>
                                                     <td>{item.name}</td>
-                                                    <td>{item.type}</td>
-                                                    <td>{item.dep}</td>
-                                                    <td>{item.uid}</td>
-                                                    <td>{item.mode?"Attendance":"enrolment"}</td>
+                                                    <td>{item.gender}</td>
+                                                    <td>{item.email}</td>
+                                                    <td>{item.company_id}</td>
                                                 </tr>
                                             )
                                         })
@@ -63,11 +100,11 @@ class Attendent extends Component {
                     </Row>
                 </div>
 
-                <DeviceAdd show={this.state.modalShow}
+                <AttendantAdd show={this.state.modalShow}
                            onHide={() => this.setModalShow(false)}/>
             </div>
         );
     }
 }
 
-export default Attendent;
+export default Attendant;

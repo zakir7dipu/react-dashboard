@@ -9,6 +9,7 @@ import {RiDashboardFill} from "@react-icons/all-files/ri/RiDashboardFill";
 import {GoArrowSmallRight} from "@react-icons/all-files/go/GoArrowSmallRight";
 import {AiFillDatabase} from "@react-icons/all-files/ai/AiFillDatabase";
 import {Link} from "react-router-dom";
+import {FiUsers} from "@react-icons/all-files/fi/FiUsers";
 
 class LeftBar extends Component {
 
@@ -89,6 +90,13 @@ class LeftBar extends Component {
                                 <Link to="/device" className="nav-link">
                                     <AiFillDatabase size={25}/>
                                     <span className="link-text">Device</span>
+                                </Link>
+                            </li>
+
+                            <li className="nav-item">
+                                <Link to="/attendents" className="nav-link">
+                                    <FiUsers size={25}/>
+                                    <span className="link-text">Attendent</span>
                                 </Link>
                             </li>
 
