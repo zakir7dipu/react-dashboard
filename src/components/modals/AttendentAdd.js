@@ -30,7 +30,6 @@ class Attendent extends Component {
                     icon: 'success',
                     title: response.data
                 })
-                console.log(response)
             })
             .catch(error => {
                 this.setState({ errorMessage: error.message });
