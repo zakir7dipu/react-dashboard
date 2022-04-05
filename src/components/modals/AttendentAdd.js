@@ -54,7 +54,7 @@ class Attendent extends Component {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add Device
+                        Add Attendant
                     </Modal.Title>
                 </Modal.Header>
                 <form onSubmit={this.saveAttendant}>

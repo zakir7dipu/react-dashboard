@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import Logo from "../assets/img/logo/large.png"
 import "../GlobalVariable"
 import axios from "axios";
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
+axios.defaults.baseURL = 'https://attendant.savar121gps.com'
 
 class Login extends Component {
 
     constructor(prop) {
         super();
         this.state = {
-            baseUrl: 'http://127.0.0.1:8000',
+            // baseUrl: 'http://127.0.0.1:8000',
             email: '',
             password: '',
             remember_me: ''
