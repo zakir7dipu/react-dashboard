@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Logo from "../assets/img/logo/large.png"
 import "../GlobalVariable"
 import axios from "axios";
-axios.defaults.baseURL = 'https://attendant.savar121gps.com'
+axios.defaults.baseURL = 'http://192.168.43.56:8000'
 
 class Login extends Component {
 
