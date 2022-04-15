@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import Logo from "../assets/img/logo/large.png"
 import "../GlobalVariable"
 import axios from "axios";
-axios.defaults.baseURL = 'http://192.168.43.56:8000'
+axios.defaults.baseURL = process.env.React_App_Base_Url
 
 class Login extends Component {
 
     constructor(prop) {
         super();
         this.state = {
-            // baseUrl: 'http://127.0.0.1:8000',
             email: '',
             password: '',
             remember_me: ''
@@ -27,7 +26,7 @@ class Login extends Component {
         this.setState({
             email: '',
             password: '',
-            remember_me: ''
+            // remember_me: ''
         })
     }
 
@@ -36,16 +35,14 @@ class Login extends Component {
             .then(response => {
                 global.toast.fire({
                     icon: 'success',
-                    title: 'Signed in successfully'
+                    title: response.data.message
                 })
-
                 window.sessionStorage.setItem('session', JSON.stringify({
-                    name: response.data.name,
-                    token: response.data.token,
+                    name: response.data.data.name,
+                    token: response.data.data.token,
                     welcome: false,
                 }))
                 window.location.href= '/'
-
             })
             .catch(error => {
                 this.setState({ errorMessage: error.message });
@@ -59,7 +56,7 @@ class Login extends Component {
                 <div className="d-sm-flex justify-content-sm-center d-block">
                     <div className="card card-dark p-0 my-sm-4 my-0 bg-dark">
                         <div className="box-account">
-                            <img className="box-account-logo" src={Logo}/>
+                            <img className="box-account-logo" src={Logo} alt="logo"/>
                             <h6 className="box-account-title text-light"> Login </h6>
                             <form className="box-account-form" onSubmit={this.formOnSubmit}>
                                 <span className="reauth-email"> </span>

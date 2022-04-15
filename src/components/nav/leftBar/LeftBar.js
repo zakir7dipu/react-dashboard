@@ -87,6 +87,13 @@ class LeftBar extends Component {
                             </li>
 
                             <li className="nav-item">
+                                <Link to="/companies" className="nav-link">
+                                    <AiFillDatabase size={25}/>
+                                    <span className="link-text">Companies</span>
+                                </Link>
+                            </li>
+
+                            <li className="nav-item">
                                 <Link to="/device" className="nav-link">
                                     <AiFillDatabase size={25}/>
                                     <span className="link-text">Device</span>

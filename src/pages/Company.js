@@ -1,83 +1,72 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import DeviceAdd from "../components/modals/DeviceAdd";
 import {IoMdAdd} from "@react-icons/all-files/io/IoMdAdd";
+import CompanyModal from "../components/modals/CompanyModal";
 import {RiFileEditLine} from "@react-icons/all-files/ri/RiFileEditLine";
 import {BsFillTrashFill} from "@react-icons/all-files/bs/BsFillTrashFill";
 import Swal from "sweetalert2";
 
-class Device extends Component {
-    constructor(props) {
+class Company extends Component {
+    constructor() {
         super();
+
         this.state = {
-            devices: [],
-            modalShow:false,
-            modalTitle: 'Register New Device',
-            device: ''
+            companies: [],
+            modalTitle: 'Register New Company',
+            company: ''
         }
     }
 
     setModalShow = (value) => {
         this.setState({modalShow:value});
-    }
-
-    onSave = (value) => {
-        let {devices} = this.state;
-        devices.push(value);
-        this.setState({devices:devices});
-        this.setModalShow(false)
+        // setTimeout(()=>{
+        //     this.getData()
+        // },3000);
     }
 
     getData = () => {
         let session = JSON.parse(window.sessionStorage.getItem('session'))
-        axios.get(`api/devices/`, {headers: { Authorization: `Bearer ${session.token}` }})
-            .then(response => {
-                this.setState({devices: response.data.data})
+        axios.get('/api/companies', {headers: { Authorization: `Bearer ${session.token}` }})
+            .then(response=>{
+                this.setState({companies: response.data.data})
             })
-            .catch(error => {
+            .catch(error=>{
                 global.toast.fire({
                     icon: 'error',
                     title: error.response.data.message
                 })
-            });
+            })
     }
 
-    modeUpdate = (value) => {
-        let session = JSON.parse(window.sessionStorage.getItem('session'))
-        axios.get(`api/devices/${value}/edit`, {headers: { Authorization: `Bearer ${session.token}` }})
-            .then(response => {
-               this.getData()
-            })
-            .catch(error => {
-                global.toast.fire({
-                    icon: 'error',
-                    title: error.response.data.message
-                })
-            });
+    onSave = (value) => {
+        let {companies} = this.state;
+        companies.push(value);
+        this.setState({companies:companies})
+        this.setModalShow(false)
     }
 
     onEdit = (value, name) => {
         this.setState({
             modalTitle: `Edit ${name}`,
-            device: value
+            company: value
         })
         this.setModalShow(true)
     }
 
     onUpdate = (value) => {
-        let {devices} = this.state;
-        Array.from(devices).map((item, index) => {
+        let {companies} = this.state;
+        Array.from(companies).map((item, index) => {
             if (item.id === value.id){
-                devices[index] = value
+                companies[index] = value
             }
         })
-        this.setState({devices:devices})
+        this.setState({companies:companies})
         this.setModalShow(false)
     }
 
-    onDelete = (value, name) => {
+    onDelete= (value, name) => {
         Swal.fire({
             title: 'Are you sure?',
             html:
@@ -90,19 +79,19 @@ class Device extends Component {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 let session = JSON.parse(window.sessionStorage.getItem('session'))
-                axios.delete(`/api/devices/${value}`, {headers: { Authorization: `Bearer ${session.token}` }})
+                axios.delete(`/api/companies/${value}`, {headers: { Authorization: `Bearer ${session.token}` }})
                     .then(response => {
                         global.toast.fire({
                             icon: 'success',
                             title: response.data.message
                         })
-                        let {devices} = this.state;
-                        Array.from(devices).map((item, index) => {
+                        let {companies} = this.state;
+                        Array.from(companies).map((item, index) => {
                             if (item.id === response.data.data.id){
-                                devices.splice(index, 1)
+                                companies.splice(index, 1)
                             }
                         })
-                        this.setState({devices:devices})
+                        this.setState({companies:companies})
                     })
                     .catch(error => {
                         global.toast.fire({
@@ -117,12 +106,12 @@ class Device extends Component {
     }
 
     componentDidMount() {
-        this.getData();
+        this.getData()
     }
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <div className="container-fluid">
 
                     <Row>
@@ -130,21 +119,21 @@ class Device extends Component {
                             <nav
                                 className="breadcrumb justify-content-sm-start justify-content-center text-center text-light bg-dark ">
                                 <Link className="breadcrumb-item text-white" to="/">Home</Link>
-                                <span className="breadcrumb-item active">Device</span>
+                                <span className="breadcrumb-item active">Registered Companies</span>
                                 <span className="breadcrumb-info" id="time"></span>
                             </nav>
                         </Col>
                     </Row>
 
                     <Row>
-                        <Col lg={10} md={11} sm={11} className="mx-auto card bg-dark">
+                        <Col lg={11} md={11} sm={11} className="mx-auto card bg-dark">
                             <div className="card-header">
                                 <Col>
-                                    <span className="text-light h5">All Devices</span>
+                                    <span className="text-light h5">Registered Companies</span>
                                     <button type="button" className="btn btn-danger rounded btn-sm float-right" onClick={() => {
                                         this.setState({
-                                            modalTitle: 'Register New Device',
-                                            device: ''
+                                            modalTitle: 'Register New Company',
+                                            company: ''
                                         })
                                         this.setModalShow(true)
                                     }}><IoMdAdd className="text-light" size={20}/></button>
@@ -155,31 +144,23 @@ class Device extends Component {
                                     <thead>
                                     <tr className="text-center text-capitalize">
                                         <th width="5%">SL</th>
-                                        <th width="25%">Name</th>
-                                        <th width="10%">Type</th>
-                                        <th width="15%">UID</th>
-                                        <th width="15%">Company</th>
-                                        <th width="15%">Mode</th>
-                                        <th width="15%">Action</th>
+                                        <th width="35%">name</th>
+                                        <th width="20%">phone</th>
+                                        <th width="20%">email</th>
+                                        <th width="10%">type</th>
+                                        <th width="10%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {
-                                        this.state.devices.map((item, index) => {
+                                        this.state.companies.map((item, index) => {
                                             return(
                                                 <tr key={item.id}>
                                                     <td>{index+1}</td>
                                                     <td>{item.name}</td>
+                                                    <td>{item.phone}</td>
+                                                    <td>{item.email}</td>
                                                     <td>{item.type}</td>
-                                                    <td>{item.uid}</td>
-                                                    <td>{item.company_name}</td>
-                                                    <td>
-                                                        <select className="form-control rounded" value={item.mode?"Attendance":"Enrolment"} onChange={()=>this.modeUpdate(item.id)}>
-                                                            <option value="">Select One</option>
-                                                            <option value="Attendance">Attendance</option>
-                                                            <option value="Enrolment">Enrolment</option>
-                                                        </select>
-                                                    </td>
                                                     <td className="d-flex justify-content-around">
                                                         <Button className="btn-success btn-sm rounded" onClick={()=>{
                                                             this.onEdit(item.id, item.name)
@@ -200,11 +181,11 @@ class Device extends Component {
                     </Row>
                 </div>
 
-                <DeviceAdd show={this.state.modalShow}
-                           onHide={() => this.setModalShow(false)} onSave={value=> this.onSave(value)} modalTitle={this.state.modalTitle} device={this.state.device} onUpdate={value=>this.onUpdate(value)}/>
-            </div>
+                <CompanyModal show={this.state.modalShow}
+                              onHide={() => this.setModalShow(false)} modalTitle={this.state.modalTitle} onSave={(value)=>this.onSave(value)} company={this.state.company} onUpdate={(value)=>this.onUpdate(value)}/>
+            </Fragment>
         );
     }
 }
 
-export default Device;
+export default Company;
