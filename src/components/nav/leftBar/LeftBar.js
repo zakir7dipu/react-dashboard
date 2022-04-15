@@ -100,35 +100,30 @@ class LeftBar extends Component {
                                 </Link>
                             </li>
 
-                            <li className="nav-item">
-                                <Link to="/attendents" className="nav-link">
+
+
+                            <li className={`nav-item has-dropdown`}>
+                                <a href="#" className="nav-link" onClick={this.hasDropDownAction}>
                                     <FiUsers size={25}/>
                                     <span className="link-text">Attendent</span>
-                                </Link>
+                                    <span className="badge badge-md"><GoArrowSmallRight size={15}/></span>
+                                </a>
+                                <ul className={`dropdown-list top`}>
+                                    <li className="nav-item">
+                                        <Link to="/attendants" className="nav-link">
+                                            <GoArrowSmallRight size={15}/>
+                                            <span className="link-text">List</span>
+                                        </Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="/attendant-logs" className="nav-link">
+                                            <GoArrowSmallRight size={15}/>
+                                            <span className="link-text">Log</span>
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
-
-                            {/*<li className={`nav-item has-dropdown`}>*/}
-                            {/*    <a href="#" className="nav-link" onClick={this.hasDropDownAction}>*/}
-                            {/*        <RiDashboardFill size={25}/>*/}
-                            {/*        <span className="link-text">dashboard</span>*/}
-                            {/*        <span className="badge badge-md"><GoArrowSmallRight size={15}/></span>*/}
-                            {/*    </a>*/}
-                            {/*    <ul className={`dropdown-list top`}>*/}
-                            {/*        <li>*/}
-                            {/*            <a href="#" className="nav-link">*/}
-                            {/*                <GoArrowSmallRight size={15}/>*/}
-                            {/*                <span className="link-text">light</span>*/}
-                            {/*            </a>*/}
-                            {/*        </li>*/}
-
-                            {/*        <li>*/}
-                            {/*            <a href="#" className="nav-link">*/}
-                            {/*                <GoArrowSmallRight size={15}/>*/}
-                            {/*                <span className="link-text">dark</span>*/}
-                            {/*            </a>*/}
-                            {/*        </li>*/}
-                            {/*    </ul>*/}
-                            {/*</li>*/}
                         </ul>
                     </div>
                 </div>
