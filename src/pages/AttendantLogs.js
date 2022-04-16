@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {IoMdAdd} from "@react-icons/all-files/io/IoMdAdd";
-import {RiFileEditLine} from "@react-icons/all-files/ri/RiFileEditLine";
-import {BsFillTrashFill} from "@react-icons/all-files/bs/BsFillTrashFill";
+import axios from "axios";
 
 class AttendantLogs extends Component {
     constructor() {
@@ -13,6 +11,27 @@ class AttendantLogs extends Component {
             attendant_logs: [],
         }
     }
+
+    getData = () => {
+        let session = JSON.parse(window.sessionStorage.getItem('session'))
+        axios.get(`/api/attendant-logs`, {headers: { Authorization: `Bearer ${session.token}` }})
+            .then(response => {
+                // this.setState({attendants:response.data.data})
+                console.log(response.data.data)
+            })
+            .catch(error => {
+                global.toast.fire({
+                    icon: 'error',
+                    title: error.response.data.message
+                })
+            });
+    }
+
+    componentDidMount() {
+        this.getData()
+        // setInterval(this.getData, 60000)
+    }
+
     render() {
         return (
             <div className="container-fluid">

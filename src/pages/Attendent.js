@@ -143,10 +143,11 @@ class Attendant extends Component {
                                     <tr className="text-center text-capitalize">
                                         <th width="5%">SL</th>
                                         <th width="15%">ID</th>
-                                        <th width="35%">Name</th>
+                                        <th width="30%">Name</th>
                                         <th width="5%">gender</th>
                                         <th width="15%">Email</th>
                                         <th width="15%">Company</th>
+                                        <th width="5%">Connected</th>
                                         <th width="10%">Action</th>
                                     </tr>
                                     </thead>
@@ -161,6 +162,7 @@ class Attendant extends Component {
                                                     <td>{item.gender}</td>
                                                     <td>{item.email}</td>
                                                     <td>{item.company_name}</td>
+                                                    <td>{item.connecting_status?"yes":"NO"}</td>
                                                     <td className="d-flex justify-content-around">
                                                         <Button className="btn-success btn-sm rounded" onClick={()=>{
                                                             this.onEdit(item.id, item.name)
