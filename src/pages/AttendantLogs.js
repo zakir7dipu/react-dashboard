@@ -16,8 +16,7 @@ class AttendantLogs extends Component {
         let session = JSON.parse(window.sessionStorage.getItem('session'))
         axios.get(`/api/attendant-logs`, {headers: { Authorization: `Bearer ${session.token}` }})
             .then(response => {
-                // this.setState({attendants:response.data.data})
-                console.log(response.data.data)
+                this.setState({attendant_logs:response.data.data})
             })
             .catch(error => {
                 global.toast.fire({
@@ -28,8 +27,8 @@ class AttendantLogs extends Component {
     }
 
     componentDidMount() {
-        this.getData()
-        // setInterval(this.getData, 60000)
+        // this.getData()
+        setInterval(this.getData, 30000)
     }
 
     render() {

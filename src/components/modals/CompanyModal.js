@@ -28,7 +28,7 @@ class CompanyModal extends Component {
         if (!this.state.email) errors.email = 'Company email is required';
         if (!this.state.type) errors.type = 'Company type is required';
         this.setState({errors:errors})
-        if (this.state.errors.length > 0) return;
+        if (!this.state.name || !this.state.phone || !this.state.email || !this.state.type) return;
 
         let inputs = new FormData();
         inputs.append('name', this.state.name)

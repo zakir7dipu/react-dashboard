@@ -32,7 +32,7 @@ class Device extends Component {
 
     getData = () => {
         let session = JSON.parse(window.sessionStorage.getItem('session'))
-        axios.get(`api/devices/`, {headers: { Authorization: `Bearer ${session.token}` }})
+        axios.get(`api/devices`, {headers: { Authorization: `Bearer ${session.token}` }})
             .then(response => {
                 this.setState({devices: response.data.data})
             })
